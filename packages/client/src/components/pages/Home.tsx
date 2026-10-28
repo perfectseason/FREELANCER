@@ -1,5 +1,6 @@
 import React from 'react'
 import Carousel from '../ui/Carousel';
+import Reviews from './Reviews';
 
 
 
@@ -202,6 +203,9 @@ const Home = () => {
     <div>
       <Carousel slides={[]} />
        
+    </div>
+    <div>
+        <Reviews />
     </div>
 
     </section>

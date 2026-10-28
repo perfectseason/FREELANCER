@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+
+@keyframes reviewFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.review-fade-in {
+  animation: reviewFadeInRight 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-fade-in {
+    animation: none;
+  }
+}
