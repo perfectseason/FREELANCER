@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../../assets/logo.jpg';
-import useCart from '../../hooks/useCart';
+import logo from '../../assets/Logo.jpg';
+
+
 
 const navLinks = [
    { label: 'Home', to: '/' },
@@ -11,8 +12,7 @@ const navLinks = [
 
 const NavBar = () => {
    const [isOpen, setIsOpen] = useState(false);
-   const [isCartOpen, setIsCartOpen] = useState(false);
-   const { cartItems, totalItems, updateQuantity, removeFromCart, isLoading } = useCart();
+
 
    const navButtonClass = ({ isActive }: { isActive: boolean }) =>
       [
@@ -23,18 +23,18 @@ const NavBar = () => {
       ].join(' ');
 
    return (
-      <header className="fixed left-0 top-0 z-50 w-full border-b border-slate-300 bg-slate-200/90 shadow-lg backdrop-blur-md">
-         <nav className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+      <header className="fixed left-0 top-0 z-50 w-full border-b border-slate-300 bg-slate-200/90 shadow- backdrop-blur-md">
+         <nav className="relative mx-auto flex h-32 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
             <Link
                to="/"
-               aria-label="Shop Arena"
+               aria-label="EASY Logistics"
                className="flex shrink-0 items-center text-border-amber-400"
                onClick={() => setIsOpen(false)}
             >
                <img
                   src={logo}
-                  alt="Perfect Homes logo"
-                  className="h-9 w-9 rounded-full border border-amber-400 object-cover shadow-sm"
+                  alt="EASY Logistics logo"
+                  className="h-25 w-25 rounded-full border border-amber-400 object-cover shadow-sm"
                />
             </Link>
 
@@ -43,7 +43,7 @@ const NavBar = () => {
                className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-center text-base font-bold uppercase tracking-wide text-slate-950 sm:static sm:translate-x-0 sm:text-xl"
                onClick={() => setIsOpen(false)}
             >
-               Shop Arena
+               EASY Logistics
             </Link>
 
             <div className="ml-auto flex items-center gap-2">
@@ -59,51 +59,7 @@ const NavBar = () => {
                   ))}
                </div>
 
-               <div className="relative">
-                  <button
-                     type="button"
-                     aria-label={`Cart, ${totalItems} items`}
-                     aria-expanded={isCartOpen}
-                     onClick={() => setIsCartOpen((open) => !open)}
-                     className="relative rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
-                  >
-                     Cart
-                     <span className="ml-2 inline-grid h-5 min-w-5 place-items-center rounded-full bg-amber-400 px-1 text-xs text-slate-950">
-                        {totalItems}
-                     </span>
-                  </button>
-                  {isCartOpen && (
-                     <div className="absolute right-0 top-full mt-2 w-80 max-w-[calc(100vw-2rem)] rounded-lg border border-slate-200 bg-white p-3 shadow-xl">
-                        <h2 className="mb-2 font-semibold text-slate-900">Your cart</h2>
-                        {cartItems.length === 0 ? (
-                           <p className="py-3 text-sm text-slate-500">Your cart is empty.</p>
-                        ) : (
-                           <ul className="max-h-80 space-y-3 overflow-y-auto">
-                              {cartItems.map((item) => (
-                                 <li key={item.id} className="flex items-center gap-3 border-b border-slate-100 pb-3">
-                                    <img
-                                       src={item.product.images?.[0]?.image || '/images/product-placeholder.png'}
-                                       alt=""
-                                       className="h-12 w-12 shrink-0 rounded object-cover"
-                                    />
-                                    <div className="min-w-0 flex-1">
-                                       <p className="truncate text-sm font-medium text-slate-900">{item.product.title}</p>
-                                       <p className="text-xs text-slate-500">{item.quantity} × {item.unit_price}</p>
-                                       <div className="mt-1 flex items-center gap-2">
-                                          <button type="button" aria-label={`Decrease ${item.product.title} quantity`} disabled={isLoading || item.quantity <= 1} onClick={() => void updateQuantity(item.id, item.quantity - 1)} className="h-6 w-6 rounded border text-sm disabled:opacity-40">−</button>
-                                          <span className="text-xs">{item.quantity}</span>
-                                          <button type="button" aria-label={`Increase ${item.product.title} quantity`} disabled={isLoading} onClick={() => void updateQuantity(item.id, item.quantity + 1)} className="h-6 w-6 rounded border text-sm disabled:opacity-40">+</button>
-                                          <button type="button" disabled={isLoading} onClick={() => void removeFromCart(item.id)} className="ml-auto text-xs text-red-700 hover:underline disabled:opacity-40">Remove</button>
-                                       </div>
-                                    </div>
-                                 </li>
-                              ))}
-                           </ul>
-                        )}
-                     </div>
-                  )}
-               </div>
-
+               
                <button
                   type="button"
                   aria-label="Toggle navigation menu"
